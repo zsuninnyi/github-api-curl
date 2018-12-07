@@ -5,11 +5,11 @@ require_once "./functions.php";
 $config = [
     "username" => "zsuninnyi",
     "token" => "72e086e7dc2e910d86469f2416a764a33ae8c0f4",
-    "repo" => "react-task"
+    "repo" => "rails/rails"
 ];
 
 // get pull requests
-$url = "https://api.github.com/repos/zsuninnyi/react-task/pulls";
+$url = "https://api.github.com/repos/" . $config["repo"] . "/pulls";
 $pullRequests = handleCURLProcess($url);
 if (empty($pullRequests[0]->url)) {
     if (!empty($pullRequests->message)) {
@@ -31,12 +31,12 @@ foreach ($pullRequestURLs as $pullRequestURL) {
     echo $pullRequest->url . " branch: " . $pullRequest->title . "<br>";
     $url = $pullRequestURL . "/commits";
     $commits = handleCURLProcess($url);
-    
+
     $touchedFiles = [];
 
     // iterate over the commits of the particular pull request
     foreach ($commits as $commit) {
-        $url = "https://api.github.com/repos/" . $config["username"] . "/" . $config["repo"] . "/commits/" . $commit->sha;
+        $url = "https://api.github.com/repos/" . $config["repo"] . "/commits/" . $commit->sha;
         $commit = handleCURLProcess($url);
 
         // figure out which files and lines changed
@@ -56,7 +56,7 @@ foreach ($pullRequestURLs as $pullRequestURL) {
                 $touchedFiles[$file->filename]["lines"][$line][] = $commit->sha;
             }
         }
-    
+
     }
 
 }

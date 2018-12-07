@@ -7,7 +7,7 @@ function readLines($string) {
         if ($line[0] === "+" || $line[0] === "-") {
            $lineReturns[] = $number;
         }
-    } 
+    }
     return $lineReturns;
 }
 
@@ -18,11 +18,11 @@ function setURL($commits, $file, $line) {
         return false;
     }
     $main = "https://github.com";
-    $url = $main . "/" . $config["username"] . "/" . $config["repo"] . "/blob";
+    $url = $main . "/" . $config["repo"] . "/blob";
     $urls = [];
     if (is_array($commits)) {
         foreach($commits as $commit) {
-            $urls[] = $url . "/" . $commit ."/" . $file . "#L" . $line; 
+            $urls[] = $url . "/" . $commit ."/" . $file . "#L" . $line;
         }
     }
     else {
