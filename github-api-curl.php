@@ -4,20 +4,18 @@ require_once "./functions.php";
 
 $config = [
     "username" => "zsuninnyi",
-    "token" => "72e086e7dc2e910d86469f2416a764a33ae8c0f4",
+    "token" => "e7dccc74dad3125c586205700596ccf32287aea7",
     "repo" => "react-task"
 ];
 
 // get pull requests
-$url = "https://api.github.com/repos/zsuninnyi/react-task/pulls";
+$url = "https://api.github.com/repos/" . $config["username"] . "/" . $config["repo"] . "/pulls";
 $pullRequests = handleCURLProcess($url);
+if (!empty($pullRequests->message)) {
+    die($pullRequests->message);
+}
 if (empty($pullRequests[0]->url)) {
-    if (!empty($pullRequests->message)) {
-        die($pullRequests->message);
-    }
-    else {
-        die("Server Error");
-    }
+    die("Server Error");
 }
 
 // get the url of each pull request
