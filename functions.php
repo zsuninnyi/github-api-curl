@@ -37,7 +37,7 @@ function handleCURLProcess($url) {
     $process = curl_init($url);
     curl_setopt($process, CURLOPT_USERAGENT, $config["username"]);
     curl_setopt($process, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($process, CURLOPT_USERPWD, $config['username'].":".$config['token']);
+    //curl_setopt($process, CURLOPT_USERPWD, $config['username'].":".$config['token']);
     $respond = curl_exec($process);
     $data = json_decode($respond);
     curl_close($process);
